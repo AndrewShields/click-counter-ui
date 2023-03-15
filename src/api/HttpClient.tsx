@@ -9,7 +9,7 @@ export interface IHttpGETProps {
 export interface IHttpPOSTProps {
 	url: string;
 	token: any;
-	data: any | any[];
+	body: any | any[];
 }
 
 export interface IHttpClient {
@@ -43,7 +43,7 @@ export default class HttpClient implements IHttpClient {
 
 	post<T>(parameters: IHttpPOSTProps): Promise<T> {
 		return new Promise<T>((resolve, reject) => {
-			const {url, token, data } = parameters;
+			const {url, token, body } = parameters;
 
 			const headers = { 'Content-Type': 'application/json' };
 
@@ -52,7 +52,7 @@ export default class HttpClient implements IHttpClient {
 				withCredentials: false,
 			}
 
-			axios.post(BASE_URL + url, data, options)
+			axios.post(BASE_URL + url, body, options)
 				.then((response: any) => {
 					resolve(response as T);
 				}).catch((reason: any) => {

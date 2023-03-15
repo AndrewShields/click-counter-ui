@@ -25,7 +25,9 @@ export const ClickCounterAPI: React.FunctionComponent = () => {
 		new HttpClient().post({
 			url: "/ClickCounter",
 			token: null,
-			data: clickCount + 1
+			body: {
+				data: clickCount + 1
+			}
 		}).then((response: any) => {
 			SetLoadingState(LoadingState.Ready);
 			SetClickCount(response.data);
