@@ -1,0 +1,45 @@
+#app {
+	display: block;
+	padding: 20px;
+}
+
+#app-header {
+	display: flex;
+	justify-content: center;
+}
+
+#click-counters {
+	/*border: 1px solid red; /* debug */
+
+	display: flex;
+	justify-content: center;
+}
+
+.click-counter-container {
+	/*border: 1px solid red;  /* debug */
+
+	padding: 10px;
+	width: 200px;
+	height: 200px;
+}
+
+.click-counter {
+	width: 100%;
+	height: 100%;
+	font-size: 16px;
+}
+
+.click-counter-loading {
+	background-color: gray;
+	cursor: default;
+}
+
+.click-counter-error {
+	background-color: #F00;
+	cursor: pointer;
+}
+
+.click-counter-ready {
+	background-color: #0C5;
+	cursor: pointer;
+}
