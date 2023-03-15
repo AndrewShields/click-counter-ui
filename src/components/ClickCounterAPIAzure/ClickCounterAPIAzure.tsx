@@ -8,7 +8,7 @@ export const ClickCounterAPIAzure: React.FunctionComponent = () => {
 
 	function getClickCount(): number {
 		new HttpClient().get({
-			url: "/FnClickCounter",
+			url: "FnClickCounter",
 			token: null,
 			params: {}
 		}).then((response: any) => {
@@ -23,7 +23,7 @@ export const ClickCounterAPIAzure: React.FunctionComponent = () => {
 
 	function handleClick(): void {
 		new HttpClient().post({
-			url: "/FnClickCounter",
+			url: "FnClickCounter",
 			token: null,
 			data: clickCount + 1
 		}).then((response: any) => {

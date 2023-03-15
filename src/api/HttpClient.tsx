@@ -16,7 +16,7 @@ export interface IHttpClient {
 	get<T>(parameters: IHttpGETProps): Promise<T>;
 }
 
-//const BASE_URL = "https://localhost:7000/api";
+//const BASE_URL = "https://localhost:7000/api/";
 const BASE_URL = "https://fnappclickcounter.azurewebsites.net/api/";
 
 export default class HttpClient implements IHttpClient {
@@ -27,7 +27,7 @@ export default class HttpClient implements IHttpClient {
 			const options: AxiosRequestConfig = {
 				headers: token,
 				params,
-				withCredentials: true,
+				withCredentials: false,
 			}
 
 			axios.get(BASE_URL + url, options)
@@ -49,7 +49,7 @@ export default class HttpClient implements IHttpClient {
 
 			const options: AxiosRequestConfig = {
 				headers: headers /* token? */,
-				withCredentials: true,
+				withCredentials: false,
 			}
 
 			axios.post(BASE_URL + url, data, options)
