@@ -1,13 +1,13 @@
 import axios, { AxiosRequestConfig, AxiosRequestHeaders } from "axios";
 
 export interface IHttpGETProps {
-	url: string;
+	endpoint: string;
 	token: any;
 	params: any | any[];
 }
 
 export interface IHttpPOSTProps {
-	url: string;
+	endpoint: string;
 	token: any;
 	body: any | any[];
 }
@@ -22,7 +22,7 @@ const BASE_URL = "https://fnappclickcounter.azurewebsites.net/api/";
 export default class HttpClient implements IHttpClient {
 	get<T>(parameters: IHttpGETProps): Promise<T> {
 		return new Promise<T>((resolve, reject) => {
-			const {url, token, params } = parameters;
+			const {endpoint, token, params } = parameters;
 
 			const options: AxiosRequestConfig = {
 				headers: token,
@@ -30,7 +30,7 @@ export default class HttpClient implements IHttpClient {
 				withCredentials: false,
 			}
 
-			axios.get(BASE_URL + url, options)
+			axios.get(BASE_URL + endpoint, options)
 				.then((response: any) => {
 					resolve(response as T);
 				}).catch((reason: any) => {
@@ -43,7 +43,7 @@ export default class HttpClient implements IHttpClient {
 
 	post<T>(parameters: IHttpPOSTProps): Promise<T> {
 		return new Promise<T>((resolve, reject) => {
-			const {url, token, body } = parameters;
+			const {endpoint, token, body } = parameters;
 
 			const headers = { 'Content-Type': 'application/json' };
 
@@ -52,7 +52,7 @@ export default class HttpClient implements IHttpClient {
 				withCredentials: false,
 			}
 
-			axios.post(BASE_URL + url, body, options)
+			axios.post(BASE_URL + endpoint, body, options)
 				.then((response: any) => {
 					resolve(response as T);
 				}).catch((reason: any) => {

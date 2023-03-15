@@ -2,13 +2,18 @@ import React from 'react';
 import HttpClient from '../../api/HttpClient';
 import { LoadingState } from '../../enums/Enums';
 
-export const ClickCounterAPI: React.FunctionComponent = () => {
+export interface IClickCounterAPIProps {
+	name: string,
+	endpoint: string
+}
+
+export const ClickCounterAPI: React.FunctionComponent<IClickCounterAPIProps> = (props: IClickCounterAPIProps) => {
 	const [loadingState, SetLoadingState] = React.useState<LoadingState>(LoadingState.Loading);
 	const [clickCount, SetClickCount] = React.useState<number>(getClickCount());
 
 	function getClickCount(): number {
 		new HttpClient().get({
-			url: "/ClickCounter",
+			endpoint: props.endpoint,
 			token: null,
 			params: {}
 		}).then((response: any) => {
@@ -19,11 +24,11 @@ export const ClickCounterAPI: React.FunctionComponent = () => {
 		});
 
 		return 0;
-	};
+	}
 
 	function handleClick(): void {
 		new HttpClient().post({
-			url: "/ClickCounter",
+			endpoint: props.endpoint,
 			token: null,
 			body: {
 				data: clickCount + 1
@@ -36,7 +41,7 @@ export const ClickCounterAPI: React.FunctionComponent = () => {
 		});
 
 		getClickCount();
-	};
+	}
 
 	function handleErrorClick(): void {
 		SetLoadingState(LoadingState.Loading);
@@ -50,13 +55,13 @@ export const ClickCounterAPI: React.FunctionComponent = () => {
 				:
 				loadingState === LoadingState.Error ?
 					<button className="click-counter click-counter-error" onClick={handleErrorClick}>
-						Failed to connect to local database
+						Failed to connect to {props.name}
 						<br></br><br></br>
 						Click to retry
 					</button>
 					:
 					<button className="click-counter click-counter-ready" onClick={handleClick}>
-						Click count (local DB)<br></br>{clickCount}
+						Click count ({props.name})<br></br>{clickCount}
 					</button>
 			}
 		</div>
